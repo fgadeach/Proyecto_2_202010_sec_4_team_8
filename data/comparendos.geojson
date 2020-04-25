@@ -1,156 +1,24 @@
 {
 	"type": "FeatureCollection",
-	"name": "Comparendos_DEI_2018",
-	"crs": {
-		"type": "name",
-		"properties": {
-			"name": "urn:ogc:def:crs:OGC:1.3:CRS84"
-		}
-	},
 	"features": [
 		{
 			"type": "Feature",
 			"properties": {
-				"OBJECTID": 29042,
-				"FECHA_HORA": "2018/12/10",
-				"MEDIO_DETE": "DEAP",
-				"CLASE_VEHI": "AUTOMÓVIL",
-				"TIPO_SERVI": "Particular",
-				"INFRACCION": "C02",
-				"DES_INFRAC": "ESTACIONAR UN VEHÍCULO EN SITIOS PROHIBIDOS.",
-				"LOCALIDAD": "BARRIOS UNIDOS"
-			},
-			"geometry": {
-				"type": "Point",
-				"coordinates": [
-					-74.097002,
-					4.668603,
-					0
-				]
-			}
-		},
-		{
-			"type": "Feature",
-			"properties": {
-				"OBJECTID": 509329,
-				"FECHA_HORA": "2018/01/17",
-				"MEDIO_DETE": "LAPIZ",
-				"CLASE_VEHI": "CAMIONETA",
-				"TIPO_SERVI": "Particular",
-				"INFRACCION": "C35",
-				"DES_INFRAC": "NO REALIZAR LA REVISIÓN TECNICOMECÁNICA EN EL PLAZO LEGAL ESTABLECIDO O CUANDO EL VEHÍCULO  NO SE ENCUENTRE EN ADECUADAS CONDICIONES TECNICOMECÁNICAS O DE EMISIONES CONTAMINANTES, AÚN CUANDO PORTE LOS CERTIFICADOS CORRESPONDIENTES, ADEMÁS EL VEHÍC",
-				"LOCALIDAD": "TUNJUELITO"
-			},
-			"geometry": {
-				"type": "Point",
-				"coordinates": [
-					-74.138,
-					4.573828870000057,
-					0
-				]
-			}
-		},
-		{
-			"type": "Feature",
-			"properties": {
-				"OBJECTID": 519553,
-				"FECHA_HORA": "2018/01/17",
-				"MEDIO_DETE": "LAPIZ",
-				"CLASE_VEHI": "CAMIONETA",
-				"TIPO_SERVI": "Particular",
-				"INFRACCION": "C35",
-				"DES_INFRAC": "CONDUCIR UN VEHÍCULO CON LA LICENCIA DE CONDUCCIÓN VENCIDA.",
-				"LOCALIDAD": "BOSA"
-			},
-			"geometry": {
-				"type": "Point",
-				"coordinates": [
-					-74.141398,
-					4.698841740000034,
-					0
-				]
-			}
-		},
-		{
-			"type": "Feature",
-			"properties": {
-				"OBJECTID": 176695,
-				"FECHA_HORA": "2018/09/12",
-				"MEDIO_DETE": "LAPIZ",
-				"CLASE_VEHI": "MOTOCICLETA",
-				"TIPO_SERVI": "Particular",
-				"INFRACCION": "C02",
-				"DES_INFRAC": "ESTACIONAR UN VEHÍCULO EN SITIOS PROHIBIDOS.",
-				"LOCALIDAD": "TEUSAQUILLO"
-			},
-			"geometry": {
-				"type": "Point",
-				"coordinates": [
-					-74.09858,
-					4.616752760000054,
-					0
-				]
-			}
-		},
-		{
-			"type": "Feature",
-			"properties": {
-				"OBJECTID": 395846,
-				"FECHA_HORA": "2018/03/31",
-				"MEDIO_DETE": "LAPIZ",
-				"CLASE_VEHI": "CAMPERO",
-				"TIPO_SERVI": "Particular",
-				"INFRACCION": "D02",
-				"DES_INFRAC": "CONDUCIR SIN PORTAR LOS SEGUROS ORDENADOS POR LA LEY. ADEMÁS, EL VEHÍCULO SERÁ INMOVILIZADO.",
-				"LOCALIDAD": "FONTIBON"
-			},
-			"geometry": {
-				"type": "Point",
-				"coordinates": [
-					-74.12524,
-					4.68547637000006,
-					0
-				]
-			}
-		},
-		{
-			"type": "Feature",
-			"properties": {
-				"OBJECTID": 46500,
-				"FECHA_HORA": "2018/12/04",
-				"MEDIO_DETE": "LAPIZ",
-				"CLASE_VEHI": "CAMIONETA",
-				"TIPO_SERVI": "Particular",
-				"INFRACCION": "C02",
-				"DES_INFRAC": "ESTACIONAR UN VEHÍCULO EN SITIOS PROHIBIDOS.",
-				"LOCALIDAD": "BARRIOS UNIDOS"
-			},
-			"geometry": {
-				"type": "Point",
-				"coordinates": [
-					-74.08968,
-					4.631539910000072,
-					0
-				]
-			}
-		},
-		{
-			"type": "Feature",
-			"properties": {
-				"OBJECTID": 58338,
-				"FECHA_HORA": "2018/11/26",
-				"MEDIO_DETE": "LAPIZ",
-				"CLASE_VEHI": "AUTOMÓVIL",
-				"TIPO_SERVI": "Particular",
+				"OBJECTID": 243181,
+				"FECHA_HORA": "2018-06-15T09:40:00.000Z",
+				"MEDIO_DETECCION": "LAPIZ",
+				"CLASE_VEHICULO": "MOTOCICLETA",
+				"TIPO_SERVICIO": "Particular",
 				"INFRACCION": "C31",
-				"DES_INFRAC": "NO ACATAR LAS SEÑALES O REQUERIMIENTOS IMPARTIDOS POR LOS AGENTES DE TRANSITO",
-				"LOCALIDAD": "TEUSAQUILLO"
+				"DES_INFRACCION": "\nNO ACATAR LAS SEÑALES O REQUERIMIENTOS IMPARTIDOS POR LOS AGENTES DE TRÁNSITO.",
+				"LOCALIDAD": "SUBA",
+				"MUNICIPIO": "BOGOTA"
 			},
 			"geometry": {
 				"type": "Point",
 				"coordinates": [
-					-74.102085,
-					4.650748940000028,
+					-74.08775699999995,
+					4.616270400000076,
 					0
 				]
 			}
@@ -158,20 +26,21 @@
 		{
 			"type": "Feature",
 			"properties": {
-				"OBJECTID": 184177,
-				"FECHA_HORA": "2018/09/10",
-				"MEDIO_DETE": "LAPIZ",
-				"CLASE_VEHI": "MOTOCICLETA",
-				"TIPO_SERVI": "Particular",
-				"INFRACCION": "B02",
-				"DES_INFRAC": "CONDUCIR UN VEHÍCULO CON LA LICENCIA DE CONDUCCIÓN VENCIDA.",
-				"LOCALIDAD": "BOSA"
+				"OBJECTID": 193460,
+				"FECHA_HORA": "2018-05-25T16:10:00.000Z",
+				"MEDIO_DETECCION": "LAPIZ",
+				"CLASE_VEHICULO": "AUTOMÓVIL",
+				"TIPO_SERVICIO": "Particular",
+				"INFRACCION": "C02",
+				"DES_INFRACCION": "ESTACIONAR UN VEHÍCULO EN SITIOS PROHIBIDOS.",
+				"LOCALIDAD": "BARRIOS UNIDOS",
+				"MUNICIPIO": "BOGOTA"
 			},
 			"geometry": {
 				"type": "Point",
 				"coordinates": [
-					-74.121396,
-					4.53040591000007,
+					-74.06370899999996,
+					4.688000690000024,
 					0
 				]
 			}
@@ -179,20 +48,351 @@
 		{
 			"type": "Feature",
 			"properties": {
-				"OBJECTID": 395366,
-				"FECHA_HORA": "2018/04/06",
-				"MEDIO_DETE": "LAPIZ",
-				"CLASE_VEHI": "BICICLETA",
-				"TIPO_SERVI": "Particular",
+				"OBJECTID": 217406,
+				"FECHA_HORA": "2018-05-25T15:20:00.000Z",
+				"MEDIO_DETECCION": "LAPIZ",
+				"CLASE_VEHICULO": "CAMIONETA",
+				"TIPO_SERVICIO": "Particular",
+				"INFRACCION": "C35",
+				"DES_INFRACCION": "NO REALIZAR LA REVISIÓN TECNICOMECÁNICA EN EL PLAZO LEGAL ESTABLECIDO O CUANDO EL VEHÍCULO  NO SE ENCUENTRE EN ADECUADAS CONDICIONES TECNICOMECÁNICAS O DE EMISIONES CONTAMINANTES, AÚN CUANDO PORTE LOS CERTIFICADOS CORRESPONDIENTES, ADEMÁS EL VEHÍCULO SERÁ INMOVILIZADO.",
+				"LOCALIDAD": "TUNJUELITO",
+				"MUNICIPIO": "BOGOTA"
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [
+					-74.08916099999993,
+					4.615817100000072,
+					0
+				]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"OBJECTID": 525883,
+				"FECHA_HORA": "2018-12-21T07:50:00.000Z",
+				"MEDIO_DETECCION": "LAPIZ",
+				"CLASE_VEHICULO": "AUTOMÓVIL",
+				"TIPO_SERVICIO": "Particular",
+				"INFRACCION": "C06",
+				"DES_INFRACCION": "NO UTILIZAR EL CINTURÓN DE SEGURIDAD POR PARTE DE LOS OCUPANTES DEL VEHÍCULO.",
+				"LOCALIDAD": "ANTONIO NARIÑO",
+				"MUNICIPIO": "BOGOTA"
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [
+					-74.08001399999995,
+					4.630983230000027,
+					0
+				]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"OBJECTID": 181306,
+				"FECHA_HORA": "2018-05-07T10:51:39.000Z",
+				"MEDIO_DETECCION": "DEAP",
+				"CLASE_VEHICULO": "AUTOMÓVIL",
+				"TIPO_SERVICIO": "Particular",
+				"INFRACCION": "C03",
+				"DES_INFRACCION": "BLOQUEAR UNA CALZADA O INTERSECCIÓN CON UN VEHÍCULO, SALVO CUANDO EL BLOQUEO OBEDEZCA A LA OCURRENCIA DE UN ACCIDENTE DE TRÁNSITO.",
+				"LOCALIDAD": "ANTONIO NARIÑO",
+				"MUNICIPIO": "BOGOTA"
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [
+					-74.09967199999994,
+					4.584350000000029,
+					0
+				]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"OBJECTID": 324090,
+				"FECHA_HORA": "2018-08-08T16:10:00.000Z",
+				"MEDIO_DETECCION": "LAPIZ",
+				"CLASE_VEHICULO": "AUTOMÓVIL",
+				"TIPO_SERVICIO": "Particular",
+				"INFRACCION": "C31",
+				"DES_INFRACCION": "\nNO ACATAR LAS SEÑALES O REQUERIMIENTOS IMPARTIDOS POR LOS AGENTES DE TRÁNSITO.",
+				"LOCALIDAD": "ENGATIVA",
+				"MUNICIPIO": "BOGOTA"
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [
+					-74.08943899999997,
+					4.675244760000055,
+					0
+				]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"OBJECTID": 145549,
+				"FECHA_HORA": "2018-04-02T09:50:00.000Z",
+				"MEDIO_DETECCION": "LAPIZ",
+				"CLASE_VEHICULO": "AUTOMÓVIL",
+				"TIPO_SERVICIO": "Particular",
+				"INFRACCION": "F07",
+				"DES_INFRACCION": "CRUZAR LA VIA ATRAVESANDO EL TRAFICO VEHICULAR EN LUGARES EN DONDE EXISTEN PASOS PEATONALES.",
+				"LOCALIDAD": "BOSA",
+				"MUNICIPIO": "BOGOTA"
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [
+					-74.17820399999994,
+					4.599922960000072,
+					0
+				]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"OBJECTID": 316776,
+				"FECHA_HORA": "2018-08-05T08:57:07.000Z",
+				"MEDIO_DETECCION": "DEAP",
+				"CLASE_VEHICULO": "AUTOMÓVIL",
+				"TIPO_SERVICIO": "Particular",
+				"INFRACCION": "C02",
+				"DES_INFRACCION": "ESTACIONAR UN VEHÍCULO EN SITIOS PROHIBIDOS.",
+				"LOCALIDAD": "BARRIOS UNIDOS",
+				"MUNICIPIO": "BOGOTA"
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [
+					-74.06264299999998,
+					4.68304500000005,
+					0
+				]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"OBJECTID": 213329,
+				"FECHA_HORA": "2018-06-02T15:40:00.000Z",
+				"MEDIO_DETECCION": "LAPIZ",
+				"CLASE_VEHICULO": "AUTOMÓVIL",
+				"TIPO_SERVICIO": "Público",
+				"INFRACCION": "C35",
+				"DES_INFRACCION": "NO REALIZAR LA REVISIÓN TECNICOMECÁNICA EN EL PLAZO LEGAL ESTABLECIDO O CUANDO EL VEHÍCULO  NO SE ENCUENTRE EN ADECUADAS CONDICIONES TECNICOMECÁNICAS O DE EMISIONES CONTAMINANTES, AÚN CUANDO PORTE LOS CERTIFICADOS CORRESPONDIENTES, ADEMÁS EL VEHÍCULO SERÁ INMOVILIZADO.",
+				"LOCALIDAD": "FONTIBON",
+				"MUNICIPIO": "BOGOTA"
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [
+					-74.08784599999996,
+					4.615945300000021,
+					0
+				]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"OBJECTID": 193006,
+				"FECHA_HORA": "2018-05-22T19:20:00.000Z",
+				"MEDIO_DETECCION": "LAPIZ",
+				"CLASE_VEHICULO": "CAMIONETA",
+				"TIPO_SERVICIO": "Particular",
+				"INFRACCION": "C02",
+				"DES_INFRACCION": "ESTACIONAR UN VEHÍCULO EN SITIOS PROHIBIDOS.",
+				"LOCALIDAD": "PUENTE ARANDA",
+				"MUNICIPIO": "BOGOTA"
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [
+					-74.10313699999995,
+					4.617364430000066,
+					0
+				]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"OBJECTID": 188921,
+				"FECHA_HORA": "2018-05-16T10:10:00.000Z",
+				"MEDIO_DETECCION": "LAPIZ",
+				"CLASE_VEHICULO": "AUTOMÓVIL",
+				"TIPO_SERVICIO": "Particular",
+				"INFRACCION": "C31",
+				"DES_INFRACCION": "\nNO ACATAR LAS SEÑALES O REQUERIMIENTOS IMPARTIDOS POR LOS AGENTES DE TRÁNSITO.",
+				"LOCALIDAD": "SAN CRISTOBAL",
+				"MUNICIPIO": "BOGOTA"
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [
+					-74.09375099999994,
+					4.576113430000021,
+					0
+				]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"OBJECTID": 453635,
+				"FECHA_HORA": "2018-11-08T17:20:00.000Z",
+				"MEDIO_DETECCION": "LAPIZ",
+				"CLASE_VEHICULO": "AUTOMÓVIL",
+				"TIPO_SERVICIO": "Particular",
+				"INFRACCION": "C03",
+				"DES_INFRACCION": "BLOQUEAR UNA CALZADA O INTERSECCIÓN CON UN VEHÍCULO, SALVO CUANDO EL BLOQUEO OBEDEZCA A LA OCURRENCIA DE UN ACCIDENTE DE TRÁNSITO.",
+				"LOCALIDAD": "TUNJUELITO",
+				"MUNICIPIO": "BOGOTA"
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [
+					-74.17198699999994,
+					4.594826080000075,
+					0
+				]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"OBJECTID": 413816,
+				"FECHA_HORA": "2018-11-01T10:29:42.000Z",
+				"MEDIO_DETECCION": "DEAP",
+				"CLASE_VEHICULO": "CAMIONETA",
+				"TIPO_SERVICIO": "Particular",
+				"INFRACCION": "C02",
+				"DES_INFRACCION": "ESTACIONAR UN VEHÍCULO EN SITIOS PROHIBIDOS.",
+				"LOCALIDAD": "TUNJUELITO",
+				"MUNICIPIO": "BOGOTA"
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [
+					-74.12939899999998,
+					4.578576000000055,
+					0
+				]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"OBJECTID": 519853,
+				"FECHA_HORA": "2018-12-09T07:20:00.000Z",
+				"MEDIO_DETECCION": "LAPIZ",
+				"CLASE_VEHICULO": "AUTOMÓVIL",
+				"TIPO_SERVICIO": "Público",
+				"INFRACCION": "C18",
+				"DES_INFRACCION": "CONDUCIR UN VEHÍCULO AUTORIZADO PARA PRESTAR SERVICIO PÚBLICO CON EL TAXÍMETRO DAÑADO, CON LOS SELLOS ROTOS O ETIQUETAS ADHESIVAS CON CALIBRACIÓN VENCIDA O ADULTERADAS O CUANDO SE CAREZCA DE ÉL, O CUANDO AÚN TENIÉNDOLO, NO CUMPLA CON LAS NORMAS MÍNIMAS DE CALIDAD Y SEGURIDAD EXIGIDAS POR LA AUTORIDAD COMPETENTE O ÉSTE NO ESTÉ EN FUNCIONAMIENTO, ADEMÁS EL VEHICULO SERÁ INMOVILIZADO",
+				"LOCALIDAD": "FONTIBON",
+				"MUNICIPIO": "BOGOTA"
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [
+					-74.14200999999997,
+					4.69778266000003,
+					0
+				]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"OBJECTID": 119060,
+				"FECHA_HORA": "2018-03-13T15:30:00.000Z",
+				"MEDIO_DETECCION": "LAPIZ",
+				"CLASE_VEHICULO": "AUTOMÓVIL",
+				"TIPO_SERVICIO": "Público",
+				"INFRACCION": "C35",
+				"DES_INFRACCION": "NO REALIZAR LA REVISIÓN TECNICOMECÁNICA EN EL PLAZO LEGAL ESTABLECIDO O CUANDO EL VEHÍCULO  NO SE ENCUENTRE EN ADECUADAS CONDICIONES TECNICOMECÁNICAS O DE EMISIONES CONTAMINANTES, AÚN CUANDO PORTE LOS CERTIFICADOS CORRESPONDIENTES, ADEMÁS EL VEHÍCULO SERÁ INMOVILIZADO.",
+				"LOCALIDAD": "FONTIBON",
+				"MUNICIPIO": "BOGOTA"
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [
+					-74.11302799999999,
+					4.652308250000033,
+					0
+				]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"OBJECTID": 480302,
+				"FECHA_HORA": "2018-11-17T02:50:00.000Z",
+				"MEDIO_DETECCION": "LAPIZ",
+				"CLASE_VEHICULO": "AUTOMÓVIL",
+				"TIPO_SERVICIO": "Particular",
+				"INFRACCION": "D04",
+				"DES_INFRACCION": "NO DETENERSE ANTE UNA LUZ ROJA O AMARILLA DE SEMÁFORO, UNA SEÑAL DE \"PARE\" O UN SEMÁFORO INTERMITENTE EN ROJO. EN EL CASO DE MOTOCICLETAS SE PROCEDERÁ A SU INMOVILIZACIÓN HASTA TANTO NO SE PAGUE EL VALOR DE LA MULTA O LA AUTORIDAD COMPETENTE DECIDA SOBRE SU IMPOSICIÓN EN LOS TÉRMINOS DE LOS ARTÍCULOS 135 Y 136 DEL CÓDIGO NACIONAL DE TRÁNSITO.",
+				"LOCALIDAD": "TEUSAQUILLO",
+				"MUNICIPIO": "BOGOTA"
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [
+					-74.08803099999994,
+					4.616017200000044,
+					0
+				]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"OBJECTID": 387430,
+				"FECHA_HORA": "2018-10-11T14:30:00.000Z",
+				"MEDIO_DETECCION": "LAPIZ",
+				"CLASE_VEHICULO": "AUTOMÓVIL",
+				"TIPO_SERVICIO": "Particular",
+				"INFRACCION": "C02",
+				"DES_INFRACCION": "ESTACIONAR UN VEHÍCULO EN SITIOS PROHIBIDOS.",
+				"LOCALIDAD": "USAQUEN",
+				"MUNICIPIO": "BOGOTA"
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [
+					-74.03103799999997,
+					4.692781120000063,
+					0
+				]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"OBJECTID": 195125,
+				"FECHA_HORA": "2018-05-17T07:20:00.000Z",
+				"MEDIO_DETECCION": "LAPIZ",
+				"CLASE_VEHICULO": "BICICLETA",
+				"TIPO_SERVICIO": "Particular",
 				"INFRACCION": "A08",
-				"DES_INFRAC": "TRANSITAR POR ZONAS PROHIBIDAS.",
-				"LOCALIDAD": "TEUSAQUILLO"
+				"DES_INFRACCION": "TRANSITAR POR ZONAS PROHIBIDAS.",
+				"LOCALIDAD": "BOSA",
+				"MUNICIPIO": "BOGOTA"
 			},
 			"geometry": {
 				"type": "Point",
 				"coordinates": [
-					-74.074718,
-					4.636892540000076,
+					-74.17932599999995,
+					4.596895160000031,
 					0
 				]
 			}
@@ -200,188 +400,21 @@
 		{
 			"type": "Feature",
 			"properties": {
-				"OBJECTID": 444949,
-				"FECHA_HORA": "2018/02/27",
-				"MEDIO_DETE": "LAPIZ",
-				"CLASE_VEHI": "CAMPERO",
-				"TIPO_SERVI": "Particular",
-				"INFRACCION": "C02",
-				"DES_INFRAC": "ESTACIONAR UN VEHÍCULO EN SITIOS PROHIBIDOS.",
-				"LOCALIDAD": "USAQUEN"
-			},
-			"geometry": {
-				"type": "Point",
-				"coordinates": [
-					-74.029447,
-					4.697058910000067,
-					0
-				]
-			}
-		},
-		{
-			"type": "Feature",
-			"properties": {
-				"OBJECTID": 264952,
-				"FECHA_HORA": "2018/07/16",
-				"MEDIO_DETE": "DEAP",
-				"CLASE_VEHI": "AUTOMÓVIL",
-				"TIPO_SERVI": "Particular",
-				"INFRACCION": "C02",
-				"DES_INFRAC": "ESTACIONAR UN VEHÍCULO EN SITIOS PROHIBIDOS.",
-				"LOCALIDAD": "CHAPINERO"
-			},
-			"geometry": {
-				"type": "Point",
-				"coordinates": [
-					-74.058233,
-					4.665981,
-					0
-				]
-			}
-		},
-		{
-			"type": "Feature",
-			"properties": {
-				"OBJECTID": 174761,
-				"FECHA_HORA": "2018/09/26",
-				"MEDIO_DETE": "Centro de Gestión",
-				"CLASE_VEHI": "AUTOMÓVIL",
-				"TIPO_SERVI": "Particular",
-				"INFRACCION": "C14",
-				"DES_INFRAC": "TRANSITAR POR SITIOS RESTRINGIDOS O EN HORAS PROHIBIDAS POR LA AUTORIDAD COMPETENTE. ADEMÁS, EL VEHÍCULO SERÁ INMOVILIZADO.",
-				"LOCALIDAD": "CHAPINERO"
-			},
-			"geometry": {
-				"type": "Point",
-				"coordinates": [
-					-74.041771,
-					4.674418,
-					0
-				]
-			}
-		},
-		{
-			"type": "Feature",
-			"properties": {
-				"OBJECTID": 56712,
-				"FECHA_HORA": "2018/11/23",
-				"MEDIO_DETE": "DEAP",
-				"CLASE_VEHI": "CAMIONETA",
-				"TIPO_SERVI": "Particular",
-				"INFRACCION": "C02",
-				"DES_INFRAC": "ESTACIONAR UN VEHÍCULO EN SITIOS PROHIBIDOS.",
-				"LOCALIDAD": "MARTIRES"
-			},
-			"geometry": {
-				"type": "Point",
-				"coordinates": [
-					-74.089637,
-					4.611596,
-					0
-				]
-			}
-		},
-		{
-			"type": "Feature",
-			"properties": {
-				"OBJECTID": 480983,
-				"FECHA_HORA": "2018/02/05",
-				"MEDIO_DETE": "DEAP",
-				"CLASE_VEHI": "CAMIONETA",
-				"TIPO_SERVI": "Particular",
-				"INFRACCION": "C02",
-				"DES_INFRAC": "ESTACIONAR UN VEHÍCULO EN SITIOS PROHIBIDOS.",
-				"LOCALIDAD": "PUENTE ARANDA"
-			},
-			"geometry": {
-				"type": "Point",
-				"coordinates": [
-					-74.111348,
-					4.630901,
-					0
-				]
-			}
-		},
-		{
-			"type": "Feature",
-			"properties": {
-				"OBJECTID": 361767,
-				"FECHA_HORA": "2018/05/16",
-				"MEDIO_DETE": "Centro de Gestión",
-				"CLASE_VEHI": "AUTOMÓVIL",
-				"TIPO_SERVI": "Particular",
-				"INFRACCION": "C14",
-				"DES_INFRAC": "TRANSITAR POR SITIOS RESTRINGIDOS O EN HORAS PROHIBIDAS POR LA AUTORIDAD COMPETENTE. ADEMÁS, EL VEHÍCULO SERÁ INMOVILIZADO.",
-				"LOCALIDAD": "CHAPINERO"
-			},
-			"geometry": {
-				"type": "Point",
-				"coordinates": [
-					-74.041771,
-					4.674418,
-					0
-				]
-			}
-		},
-		{
-			"type": "Feature",
-			"properties": {
-				"OBJECTID": 299457,
-				"FECHA_HORA": "2018/06/15",
-				"MEDIO_DETE": "LAPIZ",
-				"CLASE_VEHI": "MOTOCICLETA",
-				"TIPO_SERVI": "Particular",
-				"INFRACCION": "C02",
-				"DES_INFRAC": "ESTACIONAR UN VEHÍCULO EN SITIOS PROHIBIDOS.",
-				"LOCALIDAD": "FONTIBON"
-			},
-			"geometry": {
-				"type": "Point",
-				"coordinates": [
-					-74.147145,
-					4.669262310000022,
-					0
-				]
-			}
-		},
-		{
-			"type": "Feature",
-			"properties": {
-				"OBJECTID": 467527,
-				"FECHA_HORA": "2018/02/22",
-				"MEDIO_DETE": "LAPIZ",
-				"CLASE_VEHI": "AUTOMÓVIL",
-				"TIPO_SERVI": "Público",
-				"INFRACCION": "C02",
-				"DES_INFRAC": "ESTACIONAR UN VEHÍCULO EN SITIOS PROHIBIDOS.",
-				"LOCALIDAD": "BOSA"
-			},
-			"geometry": {
-				"type": "Point",
-				"coordinates": [
-					-74.16152,
-					4.599622260000046,
-					0
-				]
-			}
-		},
-		{
-			"type": "Feature",
-			"properties": {
-				"OBJECTID": 246062,
-				"FECHA_HORA": "2018/08/02",
-				"MEDIO_DETE": "LAPIZ",
-				"CLASE_VEHI": "MOTOCICLETA",
-				"TIPO_SERVI": "Particular",
+				"OBJECTID": 294307,
+				"FECHA_HORA": "2018-07-20T16:00:00.000Z",
+				"MEDIO_DETECCION": "LAPIZ",
+				"CLASE_VEHICULO": "AUTOMÓVIL",
+				"TIPO_SERVICIO": "Público",
 				"INFRACCION": "H03",
-				"DES_INFRAC": "EL CONDUCTOR PASAJERO O PEATON, QUE OBSTACULICE, PERJUDIQUE OPONGA EN RIESGO A LAS DEMAS PERSONAS O QUE NO CUMPLAN LAS NORMAS Y SEÑALES DE TRANSITO QUE LE SEAN APLICADAS O NO OBEDEZCA LAS INDICACIONES QUE LES DEN LAS AUTORIDADES",
-				"LOCALIDAD": "FONTIBON"
+				"DES_INFRACCION": "EL CONDUCTOR PASAJERO O PEATON, QUE OBSTACULICE, PERJUDIQUE OPONGA EN RIESGO A LAS DEMAS PERSONAS O QUE NO CUMPLAN LAS NORMAS Y SEÑALES DE TRANSITO QUE LE SEAN APLICADAS O NO OBEDEZCA LAS INDICACIONES QUE LES DEN LAS AUTORIDADES",
+				"LOCALIDAD": "KENNEDY",
+				"MUNICIPIO": "BOGOTA"
 			},
 			"geometry": {
 				"type": "Point",
 				"coordinates": [
-					-74.110573,
-					4.652979830000049,
+					-74.13719599999996,
+					4.61945503000004,
 					0
 				]
 			}
@@ -389,41 +422,21 @@
 		{
 			"type": "Feature",
 			"properties": {
-				"OBJECTID": 224494,
-				"FECHA_HORA": "2018/08/08",
-				"MEDIO_DETE": "LAPIZ",
-				"CLASE_VEHI": "MICRO",
-				"TIPO_SERVI": "Particular",
-				"INFRACCION": "C32",
-				"DES_INFRAC": "NO RESPETAR EL PASO DE PEATONES QUE CRUZAN UNA VÍA EN SITIO PERMITIDO PARA ELLOS O NO DARLES LA PRELACIÓN EN LAS FRANJAS PARA ELLO ESTABLECIDAS.",
-				"LOCALIDAD": "FONTIBON"
+				"OBJECTID": 378184,
+				"FECHA_HORA": "2018-09-29T08:15:48.000Z",
+				"MEDIO_DETECCION": "DEAP",
+				"CLASE_VEHICULO": "AUTOMÓVIL",
+				"TIPO_SERVICIO": "Particular",
+				"INFRACCION": "C02",
+				"DES_INFRACCION": "ESTACIONAR UN VEHÍCULO EN SITIOS PROHIBIDOS.",
+				"LOCALIDAD": "ENGATIVA",
+				"MUNICIPIO": "BOGOTA"
 			},
 			"geometry": {
 				"type": "Point",
 				"coordinates": [
-					-74.141837,
-					4.69507512000007,
-					0
-				]
-			}
-		},
-		{
-			"type": "Feature",
-			"properties": {
-				"OBJECTID": 209146,
-				"FECHA_HORA": "2018/08/16",
-				"MEDIO_DETE": "LAPIZ",
-				"CLASE_VEHI": "AUTOMÓVIL",
-				"TIPO_SERVI": "Particular",
-				"INFRACCION": "C38",
-				"DES_INFRAC": "USAR SISTEMAS MÓVILES DE COMUNICACIÓN O TELÉFONOS INSTALADOS EN LOS VEHÍCULOS AL MOMENTO DE CONDUCIR, EXC EPTUANDO SI ÉSTOS SON UTILIZADOS CON ACCESORIOS O EQUIPOS AUXILIARES QUE PERMITAN TENER LAS MANOS LIBRES.",
-				"LOCALIDAD": "ENGATIVA"
-			},
-			"geometry": {
-				"type": "Point",
-				"coordinates": [
-					-74.124815,
-					4.72646898000005,
+					-74.10256499999997,
+					4.71071100000006,
 					0
 				]
 			}

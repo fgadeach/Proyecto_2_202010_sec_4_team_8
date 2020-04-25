@@ -3,11 +3,14 @@ package model.logic;
 import java.awt.List;
 
 
+
 import java.io.FileNotFoundException;
 
 import java.io.FileReader;
 import java.io.IOException;
+import java.sql.Date;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Iterator;
 import java.util.Random;
 
@@ -16,8 +19,10 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
+import model.data_structures.ArbolRojoNegro;
 import model.data_structures.Array;
 import model.data_structures.LinearProbingHashST;
+import model.data_structures.Queue;
 import model.data_structures.SeparateChainingHashST;
 
 
@@ -29,40 +34,35 @@ public class Modelo {
 
 	int numeroElementos = 0;
 
-	int m = 11000;
+	int m = 1500;
 
 	private SeparateChainingHashST<String, Array<Comparendos>> hashSectoresSC = new SeparateChainingHashST<String, Array<Comparendos>>(m);
 
-	private LinearProbingHashST<String, Comparendos> hashSectoresLP = new LinearProbingHashST<String, Comparendos>(String.class, Comparendos.class, m);
+	private ArbolRojoNegro<String,Comparendos> listaComparendos = new ArbolRojoNegro<>();
+	private ArbolRojoNegro<String,Comparendos> listaComparendosMayorGravedad = new ArbolRojoNegro<>();
 
 	public void loadComparendos (String comparendosFile)
 	{
 		JSONParser parser = new JSONParser();
+
 		try {     
 			Object obj = parser.parse(new FileReader(comparendosFile));
 
 			JSONObject jsonObject =  (JSONObject) obj;
 			JSONArray jsArray = (JSONArray) jsonObject.get("features");
 
-			for(Object o: jsArray) 
-			{
+			for(Object o: jsArray) {
 				JSONObject comp = (JSONObject) o;	
 				JSONObject properties =  (JSONObject) comp.get("properties");
 				JSONObject geometry =  (JSONObject) comp.get("geometry");
 				JSONArray coordinates = (JSONArray) geometry.get("coordinates");
-				Comparendos comparendo = new Comparendos(String.valueOf(comp.get("type")), Integer.parseInt(String.valueOf(properties.get("OBJECTID"))), String.valueOf(properties.get("FECHA_HORA")), String.valueOf(properties.get("CLASE_VEHI")), String.valueOf(properties.get("TIPO_SERVI")), String.valueOf(properties.get("INFRACCION")), String.valueOf(properties.get("DES_INFRAC")), String.valueOf(properties.get("LOCALIDAD")), String.valueOf(geometry.get("type")), String.valueOf(coordinates));
+				Comparendos comparendo = new Comparendos(String.valueOf(comp.get("type")), Integer.parseInt(String.valueOf(properties.get("OBJECTID"))), String.valueOf(properties.get("FECHA_HORA")),String.valueOf(properties.get("MEDIO_DETECCION")), String.valueOf(properties.get("CLASE_VEHICULO")), String.valueOf(properties.get("TIPO_SERVICIO")), String.valueOf(properties.get("INFRACCION")), String.valueOf(properties.get("DES_INFRACCION")), String.valueOf(properties.get("LOCALIDAD")),String.valueOf(properties.get("MUNICIPIO")), String.valueOf(geometry.get("type")), String.valueOf(coordinates));
+				String objectId = Integer.toString(comparendo.getOBJECTID());
+
 				String Key = comparendo.getFECHA_HORA()+comparendo.getCLASE_VEHI()+comparendo.getINFRACCION();
 
-				if(hashSectoresLP.contains(Key))
-				{
-					Key = Key + "a";
-					hashSectoresLP.put(Key, comparendo);
-				}
 
-				else 
-				{
-					hashSectoresLP.put(Key, comparendo);
-				}
+				listaComparendos.put(objectId, comparendo);
 
 				if(hashSectoresSC.get(Key) != (null))
 				{
@@ -75,6 +75,7 @@ public class Modelo {
 					hashSectoresSC.get(Key).append(comparendo);
 				}
 
+
 			}
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -86,160 +87,313 @@ public class Modelo {
 		}
 	}
 
-	public void numeroDuplasLP() 
+	public int numeroComparendos() 
 	{
-		System.out.println(hashSectoresLP.size());
+		return listaComparendos.size();
 	}
-	public void numeroDuplasSC() 
+	public String valorMinimoObjectId() 
 	{
-		System.out.println(hashSectoresSC.size());
+		return listaComparendos.min();	
 	}
-
-	public void tamanioInicialLP() {
-		System.out.println(m);
-	}
-	public void tamanioInicialSC() {
-		System.out.println(m);
-	}
-
-	public void tamanioFinalLP() {
-		System.out.println(m-hashSectoresLP.size());
-	}
-	public void tamanioFinalSC() {
-		System.out.println(m-hashSectoresSC.size());
-	}
-
-	public void factorCargaLP() 
+	public String valorMaximoObjectId() 
 	{
-		System.out.println(hashSectoresLP.size()/m);
+		return listaComparendos.max();	
 	}
 
-	public void factorCargaSC() 
+	public void buscarComparendoId(String id) 
 	{
-		System.out.println(hashSectoresSC.size()/m);
+		Comparendos comparendo = listaComparendos.get(id);
+
+		System.out.println("OBJECTID: " + comparendo.getOBJECTID() + "\nFECHA_HORA: " + comparendo.getFECHA_HORA() + "\nTIPO_SERVI: " + comparendo.getTIPO_SERVI() + "\nCLASE_VEHI: " + comparendo.getCLASE_VEHI() + "\nINFRACCION: " + comparendo.getINFRACCION());
 	}
 
-	public int numeroRehashLP() {
-		return hashSectoresLP.numeroRehash();
-	}
-
-	public void buscarComparendoLP(String fecha, String clase, String infraccion) 
+	public void consultarComparendosRango(String idMenor, String idMayor) 
 	{
-		String Key = fecha+clase+infraccion; 
-		Iterator<String> iter = hashSectoresLP.keys();
-
-		while(iter.hasNext())
-		{
+		Iterator<String> iter = listaComparendos.keysInRange(idMenor, idMayor);
+		System.out.println(iter.hasNext());
+		while(iter.hasNext()) 
+		{	
 			String llave = iter.next();
-			if(Key.equals(llave)  || llave.equals(Key + "a"))
+			Comparendos comparendo = listaComparendos.get(llave);
+			System.out.println("OBJECTID: " + comparendo.getOBJECTID() + "\nFECHA_HORA: " + comparendo.getFECHA_HORA() + "\nTIPO_SERVI: " + comparendo.getTIPO_SERVI() + "\nCLASE_VEHI: " + comparendo.getCLASE_VEHI() + "\nINFRACCION: " + comparendo.getINFRACCION());
+		}
+	}
+
+	public void datosR() 
+	{
+		System.out.println("Altura" + listaComparendos.altura());
+		System.out.println("Total nodos" + listaComparendos.size());
+	}
+
+	public void comparendosMayorGravedad(int m) 
+	{
+
+		Iterator<String> iter = listaComparendos.keys();
+		int numero = -20;
+
+		while(iter.hasNext()) 
+		{	
+			String llave = iter.next();
+			Comparendos comparendo = listaComparendos.get(llave);
+
+			if(comparendo.getTIPO_SERVI().equals("Público")) 
 			{
-				System.out.println("OBJECTID: " + hashSectoresLP.get(llave).getOBJECTID() + "\nFECHA_HORA: " + hashSectoresLP.get(llave).getFECHA_HORA() + "\nTIPO_SERVI: " + hashSectoresLP.get(llave).getTIPO_SERVI() + "\n CLASE_VEHI: " + hashSectoresLP.get(llave).getCLASE_VEHI() + "\nINFRACCION: " + hashSectoresLP.get(llave).getINFRACCION());
+				numero = 3;
+			}
+			else if(comparendo.getTIPO_SERVI().equals("Oficial")) 
+			{
+				numero = 2;
+			}
+			else if(comparendo.getTIPO_SERVI().equals("Particular")) 
+			{
+				numero = 1;
+			}
+
+			String objectId = numero+comparendo.getINFRACCION();
+			listaComparendosMayorGravedad.put(objectId, comparendo);
+
+		}
+		Iterator<String> iter2 = listaComparendosMayorGravedad.keys();
+		while(iter2.hasNext() && m>0) 
+		{	
+
+			String llave = iter2.next();
+			Comparendos comparendo = listaComparendosMayorGravedad.get(listaComparendosMayorGravedad.max());
+			System.out.println("OBJECTID: " + comparendo.getOBJECTID() + "\nFECHA_HORA: " + comparendo.getFECHA_HORA() + "\nTIPO_SERVI: " + comparendo.getTIPO_SERVI() + "\nCLASE_VEHI: " + comparendo.getCLASE_VEHI() + "\nINFRACCION: " + comparendo.getINFRACCION());
+			listaComparendosMayorGravedad.deleteMax();
+			m--;
+		}
+	}
+
+	public void comparendosMasCercanos(int m) 
+	{
+
+		Iterator<String> iter = listaComparendos.keys();
+		double numero = -20;
+		double comparador = 0;
+		double latitudC = 4.647586;
+		double longitudC = 74.078122;
+
+		while(iter.hasNext()) 
+		{	
+			String llave = iter.next();
+			Comparendos comparendo = listaComparendos.get(llave);
+			String coordenadas = comparendo.getCOORDINATES();
+			String[] parts = coordenadas.split(",");
+
+			String part1 = parts[0];
+			Double longitud = Double.parseDouble(part1.replaceAll("\\[",""));
+
+			String part2 = parts[1];
+			Double latitud = Double.parseDouble(part2.replaceAll("\\[",""));
+
+			numero = Math.sqrt((latitudC-latitud)*(latitudC-latitud) + (longitudC-longitud)*(longitudC-longitud));
+			String objectId = numero/comparador+comparendo.getINFRACCION();
+
+			listaComparendosMayorGravedad.put(objectId, comparendo);	
+		}
+		Iterator<String> iter2 = listaComparendosMayorGravedad.keys();
+
+		while(iter2.hasNext() && m>0) 
+		{	
+			String llave = iter2.next();
+			Comparendos comparendo = listaComparendosMayorGravedad.get(listaComparendosMayorGravedad.min());
+			System.out.println("OBJECTID: " + comparendo.getOBJECTID() + "\nFECHA_HORA: " + comparendo.getFECHA_HORA() + "\nTIPO_SERVI: " + comparendo.getTIPO_SERVI() + "\nCLASE_VEHI: " + comparendo.getCLASE_VEHI() + "\nINFRACCION: " + comparendo.getINFRACCION());
+			listaComparendosMayorGravedad.deleteMin();
+			m--;
+		}
+	}
+
+	@SuppressWarnings("deprecation")
+	public void comparendosMesyDia(int m, String d) throws Exception 
+	{
+		Iterator<String> iter = listaComparendos.keys();
+		int diaInt = 6;
+		int contador = 0;
+
+		if(d.equalsIgnoreCase("d")) 
+		{
+			diaInt = 0;
+		}
+		if(d.equalsIgnoreCase("l")) 
+		{
+			diaInt = 1;
+		}
+		if(d.equalsIgnoreCase("m")) 
+		{
+			diaInt = 2;
+		}
+		if(d.equalsIgnoreCase("i")) 
+		{
+			diaInt = 3;
+
+		}
+		if(d.equalsIgnoreCase("j")) 
+		{
+			diaInt = 4;
+
+		}
+		if(d.equalsIgnoreCase("v")) 
+		{
+			diaInt = 5;
+
+		}
+
+
+		while(iter.hasNext()) 
+		{	
+
+			String llave = iter.next();
+			Comparendos comparendo = listaComparendos.get(llave);
+
+			String coordenadas = comparendo.getFECHA_HORA();
+			String[] parts = coordenadas.split("-");
+
+			String part1 = parts[0];
+			String part2 = parts[1];
+			String part3 = parts[2];
+
+			String[] diaP = part3.split("T");		
+			int anio = Integer.parseInt(part1);		
+			int mes = Integer.parseInt(part2);
+
+
+			int dia = Integer.parseInt(diaP[0]);
+
+			Date fecha = new Date(anio,mes,dia);
+			int diaSemana = fecha.getDay();
+
+			String objectId = mes + "" + diaSemana;
+
+			String l = m + "" + diaInt;
+
+			if(objectId.equals(l)) {
+				contador ++;
+				objectId = mes + "" + diaSemana + contador;
+			}
+
+			listaComparendosMayorGravedad.put(objectId, comparendo);	
+		}
+
+		Iterator<String> iter2 = listaComparendosMayorGravedad.keys();
+
+		while(iter2.hasNext() && contador>0) 
+		{	
+			String llave = iter2.next();
+			System.out.println("/////////");
+			String l = m + "" + diaInt;
+			try 
+			{
+				Comparendos comparendo = listaComparendosMayorGravedad.get(l+contador);
+				System.out.println("OBJECTID: " + comparendo.getOBJECTID() + "\nFECHA_HORA: " + comparendo.getFECHA_HORA() + "\nTIPO_SERVI: " + comparendo.getTIPO_SERVI() + "\nCLASE_VEHI: " + comparendo.getCLASE_VEHI() + "\nINFRACCION: " + comparendo.getINFRACCION());
+				contador --;
+			}
+			catch (Exception e) {
+				System.out.println("Esos son todos los comparendos que cumplen la condicion");
+				break;
 			}
 		}
 	}
 
-	public void buscarComparendoSC(String fecha, String clase, String infraccion) 
+	@SuppressWarnings("deprecation")
+	public void comparendosFechayHora(String limite_bajo, String limite_Alto) throws Exception 
 	{
-		String Key = fecha+clase+infraccion; 
-		Iterator<String> iter = hashSectoresSC.keys();
+		Iterator<String> iter = listaComparendos.keys();
 
-		while(iter.hasNext())
-		{
+		int contador = 0;
+
+		while(iter.hasNext()) 
+		{	
 			String llave = iter.next();
-			if(Key.equals(llave)  || llave.equals(Key + "a"))
+			Comparendos comparendo = listaComparendos.get(llave);
+			String objectId =comparendo.getFECHA_HORA() + contador;
+
+			listaComparendosMayorGravedad.put(objectId, comparendo);	
+		}
+
+		Iterator<String> iter2 = listaComparendosMayorGravedad.keysInRange(limite_bajo, limite_Alto);
+
+		while(iter2.hasNext()) 
+		{	
+			try 
 			{
-				for(int i = 0; i < hashSectoresSC.get(Key).size(); i++) 
-				{
-					Comparendos comparendo = hashSectoresSC.get(Key).get(i);
-					System.out.println("OBJECTID: " + comparendo.getOBJECTID() + "\nFECHA_HORA: " + comparendo.getFECHA_HORA() + "\nTIPO_SERVI: " + comparendo.getTIPO_SERVI() + "\n CLASE_VEHI: " + comparendo.getCLASE_VEHI() + "\nINFRACCION: " + comparendo.getINFRACCION());
-				}
+				String llave = iter2.next();
+				Comparendos comparendo = listaComparendosMayorGravedad.get(llave);
+				System.out.println("OBJECTID: " + comparendo.getOBJECTID() + "\nFECHA_HORA: " + comparendo.getFECHA_HORA() + "\nTIPO_SERVI: " + comparendo.getTIPO_SERVI() + "\nCLASE_VEHI: " + comparendo.getCLASE_VEHI() + "\nINFRACCION: " + comparendo.getINFRACCION());
+			}
+			catch (Exception e) {
+				System.out.println("Esos son todos los comparendos que cumplen la condicion");
+				break;
+			}
+			contador--;
+		}
+	}
+
+	public void comparendosMayorDetecClaseEtc(String detec, String clase, String tipo, String localidad) 
+	{
+
+		Iterator<String> iter = listaComparendos.keys();
+		int contador = 0;
+
+		while(iter.hasNext()) 
+		{	
+			String llave = iter.next();
+			Comparendos comparendo = listaComparendos.get(llave);
+
+			String objectId = comparendo.getMEDIO_DETE()+comparendo.getCLASE_VEHI()+comparendo.getTIPO_SERVI()+comparendo.getLOCALIDAD()+contador;
+			listaComparendosMayorGravedad.put(objectId, comparendo);
+		}
+
+
+		Iterator<String> iter2 = listaComparendosMayorGravedad.keys();
+
+		while(iter2.hasNext()) 
+		{	
+			String llave = iter2.next();
+			System.out.println("/////////");
+			String l = detec + clase + tipo+localidad+ contador;
+			try 
+			{
+				Comparendos comparendo = listaComparendosMayorGravedad.get(l);
+				System.out.println("OBJECTID: " + comparendo.getOBJECTID() + "\nFECHA_HORA: " + comparendo.getFECHA_HORA() + "\nTIPO_SERVI: " + comparendo.getTIPO_SERVI() + "\nCLASE_VEHI: " + comparendo.getCLASE_VEHI() + "\nINFRACCION: " + comparendo.getINFRACCION());
+				contador --;
+			}
+			catch (Exception e) {
+				System.out.println("Esos son todos los comparendos que cumplen la condicion");
+				break;
 			}
 		}
 	}
 
-	public void desempenioSC() 
+	public void comparendosRangoLatitudyTipo(String latitud_menor, String latitud_mayor, String tipo) 
 	{
-		int i =10000;
-		Integer nonKey = 2000;
-		ArrayList <String> validKey = new ArrayList();
 
-		Iterator<String> iter = hashSectoresSC.keys();
-		String primera = iter.next();
+		Iterator<String> iter = listaComparendos.keys();
 
-		while(iter.hasNext())
-		{
+		while(iter.hasNext()) 
+		{	
 			String llave = iter.next();
-			validKey.add(llave);
+			Comparendos comparendo = listaComparendos.get(llave);
+			String coordenadas = comparendo.getCOORDINATES();
+			String[] parts = coordenadas.split(",");
 
+			String part2 = parts[1];
+			String latitud = part2.replaceAll("\\[","");
+
+			String objectId = latitud;
+			listaComparendosMayorGravedad.put(objectId, comparendo);	
 		}
-		while(validKey.size()<8000) 
-		{
-			validKey.add(primera);
-		}
-		while(validKey.size()<10000) {
-			validKey.add(nonKey.toString());
-			nonKey--;
-		}
-		long tiempoI = System.nanoTime();
-		
-		while(i>0) 
-		{
-			for (int j = 0; j < validKey.size(); j++) 
+
+		Iterator<String> iter2 = listaComparendosMayorGravedad.keysInRange(latitud_menor, latitud_mayor);
+		while(iter2.hasNext()) 
+		{	
+			String llave = iter2.next();
+			Comparendos comparendo = listaComparendosMayorGravedad.get(llave);
+			if(comparendo.getCLASE_VEHI().equalsIgnoreCase(tipo)) 
 			{
-				hashSectoresSC.get(validKey.get(j));
-				i--;
+				System.out.println("OBJECTID: " + comparendo.getOBJECTID() + "\nFECHA_HORA: " + comparendo.getFECHA_HORA() + "\nTIPO_SERVI: " + comparendo.getTIPO_SERVI() + "\nCLASE_VEHI: " + comparendo.getCLASE_VEHI() + "\nINFRACCION: " + comparendo.getINFRACCION());
 			}
-			i--;
 		}
-		long tiempoF = System.nanoTime();
-		double demora = (tiempoF - tiempoI)/ 1e6;
-
-		System.out.println("Tiempo de demora SC: "+ demora);
 	}
-
-	public void desempenioLP() 
-	{
-		int i =10000;
-		Integer nonKey = 2000;
-		ArrayList <String> validKey = new ArrayList();
-
-		Iterator<String> iter = hashSectoresLP.keys();
-		Iterator<String> iterT = hashSectoresLP.keys();
-		
-		String primera = iter.next();
-
-		while(iter.hasNext())
-		{
-			String llave = iter.next();
-			validKey.add(llave);
-		}
-		while(validKey.size()<8000) 
-		{
-			validKey.add(primera);
-		}
-		
-		while(validKey.size()<10000) {
-			validKey.add(nonKey.toString());
-			nonKey--;
-		}
-		
-		
-		long tiempoI = System.nanoTime();
-
-		while(i>0)
-		{
-			for (int j = 0; j < validKey.size(); j++) 
-			{
-				hashSectoresLP.get(validKey.get(j));
-				i--;
-			}
-			i--;
-		}
-		long tiempoF = System.nanoTime();
-		double demora = (tiempoF - tiempoI)/ 1e6;
-
-		System.out.println("Tiempo de demora LP: "+ demora);
-	}
-
 }
 

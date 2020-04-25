@@ -5,25 +5,29 @@ public class Comparendos implements Comparable<Comparendos> {
 	private String TYPE = "";
 	private int OBJECTID = -1;
 	private String FECHA_HORA = "";
+	private String MEDIO_DETE = "";
 	private String CLASE_VEHI = "";
 	private String TIPO_SERVI = "";
 	private String INFRACCION = "";
 	private String DES_INFRAC = "";
 	private String LOCALIDAD = "";
+	private String MUNICIPIO = "";
 	private String TYPE_GEO = "";
 	private String COORDINATES = "";
 
 
-	public Comparendos( String tipo, int id, String fecha, String clase, String tipoS, String infraccion ,String descripcion, String localidad, String tipoGeo, String coordenadas)
+	public Comparendos( String tipo, int id, String fecha, String medio ,String clase, String tipoS, String infraccion ,String descripcion, String localidad, String municipio,String tipoGeo, String coordenadas)
 	{
 		TYPE = tipo;
 		OBJECTID = id;
 		FECHA_HORA = fecha;
+		MEDIO_DETE = medio;
 		CLASE_VEHI = clase;
 		TIPO_SERVI = tipoS;
 		INFRACCION = infraccion;
 		DES_INFRAC = descripcion;
 		LOCALIDAD = localidad;
+		MUNICIPIO = municipio;
 		TYPE_GEO = tipoGeo;
 		COORDINATES = coordenadas;
 	}
@@ -50,6 +54,14 @@ public class Comparendos implements Comparable<Comparendos> {
 
 	public void setFECHA_HORA(String fECHA_HORA) {
 		FECHA_HORA = fECHA_HORA;
+	}
+	
+	public String getMEDIO_DETE() {
+		return MEDIO_DETE;
+	}
+
+	public void setMEDIO_DETE(String mEDIO_DETE) {
+		MEDIO_DETE = mEDIO_DETE;
 	}
 
 	public String getCLASE_VEHI() {
@@ -91,6 +103,14 @@ public class Comparendos implements Comparable<Comparendos> {
 	public void setLOCALIDAD(String lOCALIDAD) {
 		LOCALIDAD = lOCALIDAD;
 	}
+	
+	public String getMUNICIPIO() {
+		return MUNICIPIO;
+	}
+
+	public void setMUNICIPIO(String mMUNICIPIO) {
+		MUNICIPIO = mMUNICIPIO;
+	}
 
 	public String getTYPE_GEO() {
 		return TYPE_GEO;
@@ -130,6 +150,35 @@ public class Comparendos implements Comparable<Comparendos> {
 			}	
 		}
 		return resp;
+	}
+	
+	public int compareToDos(Comparendos o) {
+		// TODO Auto-generated method stub
+		int resp = 0;
+		
+		Integer codigoUno = null;
+		Integer codigoDos = null;
+
+		if(this.getTIPO_SERVI()=="Público") {
+			codigoUno=1;
+		}
+		if(this.getTIPO_SERVI()=="Oficial") {
+			codigoUno=0;
+		}
+		if(this.getTIPO_SERVI()=="Particular") {
+			codigoUno=-1;
+		}
+		if(o.getTIPO_SERVI()=="Público") {
+			codigoUno=1;
+		}
+		if(o.getTIPO_SERVI()=="Oficial") {
+			codigoUno=0;
+		}
+		if(o.getTIPO_SERVI()=="Particular") {
+			codigoUno=-1;
+		}
+		
+		return codigoUno.toString().compareTo(codigoDos.toString());
 	}
 
 }
