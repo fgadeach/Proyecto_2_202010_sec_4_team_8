@@ -56,11 +56,26 @@ public class Modelo {
 				JSONObject properties =  (JSONObject) comp.get("properties");
 				JSONObject geometry =  (JSONObject) comp.get("geometry");
 				JSONArray coordinates = (JSONArray) geometry.get("coordinates");
-				Comparendos comparendo = new Comparendos(String.valueOf(comp.get("type")), Integer.parseInt(String.valueOf(properties.get("OBJECTID"))), String.valueOf(properties.get("FECHA_HORA")),String.valueOf(properties.get("MEDIO_DETECCION")), String.valueOf(properties.get("CLASE_VEHICULO")), String.valueOf(properties.get("TIPO_SERVICIO")), String.valueOf(properties.get("INFRACCION")), String.valueOf(properties.get("DES_INFRACCION")), String.valueOf(properties.get("LOCALIDAD")),String.valueOf(properties.get("MUNICIPIO")), String.valueOf(geometry.get("type")), String.valueOf(coordinates));
+				Comparendos comparendo = new Comparendos(String.valueOf(comp.get("type")), Integer.parseInt(String.valueOf(properties.get("OBJECTID"))), String.valueOf(properties.get("FECHA_HORA")),String.valueOf(properties.get("MEDIO_DETECCION")), String.valueOf(properties.get("CLASE_VEHICULO")), String.valueOf(properties.get("TIPO_SERVICIO")), String.valueOf(properties.get("INFRACCION")), String.valueOf(properties.get("DES_INFRACCION")), String.valueOf(properties.get("LOCALIDAD")),String.valueOf(properties.get("MUNICIPIO")), String.valueOf(geometry.get("type")), String.valueOf(coordinates),0,0,0);
 				String objectId = Integer.toString(comparendo.getOBJECTID());
+
 
 				String Key = comparendo.getFECHA_HORA()+comparendo.getCLASE_VEHI()+comparendo.getINFRACCION();
 
+				String coordenadas = comparendo.getFECHA_HORA();
+				String[] parts = coordenadas.split("-");
+
+				String part1 = parts[0];
+				String part2 = parts[1];
+				String part3 = parts[2];
+
+				String[] diaP = part3.split("T");		
+				int anio = Integer.parseInt(part1);		
+				int mes = Integer.parseInt(part2);
+				int dia = Integer.parseInt(diaP[0]);
+				comparendo.setDIA(dia);
+				comparendo.setMes(mes);
+				comparendo.setAnio(anio);
 
 				listaComparendos.put(objectId, comparendo);
 
@@ -400,84 +415,60 @@ public class Modelo {
 	{
 		Iterator<String> iter = listaComparendos.keys();
 
-		int diaC = 01;
-		int mesC = 01;
-		int anioC = 2018;
-		int prueba = 0;
-		String key = anioC+"/" + mesC+"/" + diaC; 
+		int contadorDia= 1;
+		int contadorAnio = 2018;
+		int contadorMes = 1;
+		int cont = 0;
 
-		int contadorMaximo = 1500;
-		int contadorGeneral =0;
+		int contadorGeneral = 0;
+		int maximo=1500;
 
 		while(iter.hasNext()) 
-		{
+		{	
 			String llave = iter.next();
 			Comparendos comparendo = listaComparendos.get(llave);
 
-			String coordenadas = comparendo.getFECHA_HORA();
-			String[] parts = coordenadas.split("-");
-
-			String part1 = parts[0];
-			String part2 = parts[1];
-			String part3 = parts[2];
-
-			String[] diaP = part3.split("T");
-			int anio = Integer.parseInt(part1);		
-			int mes = Integer.parseInt(part2);
-			int dia = Integer.parseInt(diaP[0]);
-
-			String codigo = anio+"/"+mes+"/"+dia;
-
-			if(hashSectoresSC.get(codigo) != (null))
-			{
-
-				hashSectoresSC.get(codigo).append(comparendo);
-			}
-			else
-			{
-				hashSectoresSC.put(codigo, new Array<Comparendos>());
-				hashSectoresSC.get(codigo).append(comparendo);
-			}	
-
+			String codigo = comparendo.getMes()+""+comparendo.getDia()+""+cont;
+			listaComparendosMayorGravedad.put(codigo, comparendo);
+			cont++;
 		}
 
-		Iterator<String> iterhash = hashSectoresSC.keys();
-
-		while(iterhash.hasNext())
+		while(contadorMes<=12) 
 		{
-			diaC = diaC+prueba;
-			if(diaC>31) {mesC+=1;diaC=diaC-31;}
-			key = anioC+"/" + mesC+"/" + diaC;
+			int conta = contadorDia+d;
+			if(conta>31) {contadorMes++;conta=conta-31;}
 
-			String llave = iterhash.next();
 
-			hashSectoresSC.get(key);
+			String codigo = contadorMes+""+contadorDia;
+			String codigoMayor = contadorMes+""+conta;		
 
-			if(key.compareTo(llave)>=0 && prueba<=d)
-			{
+			Iterator<String> iter2 = listaComparendosMayorGravedad.keysInRange(codigo, codigoMayor);
 
-				for(int i = 0; i < hashSectoresSC.get(llave).size(); i++) 
+			while(iter2.hasNext()) 
+			{	
+				String lector = iter2.next();
+				Comparendos comparendo = listaComparendosMayorGravedad.get(lector);
+
+				if(maximo>0) 
 				{
-					if(contadorMaximo>0) 
-					{
-						contadorGeneral++;
-						contadorMaximo--;
-					}else 
-					{
-						break;
-					}
+					contadorGeneral++;
+					maximo--;
+
 				}
-				contadorMaximo = 1500;
-				prueba++;
+				else 
+				{
+					break;
+				}
 			}
 
-			else if(prueba>d)
+			if(contadorGeneral>0) 
 			{
-				System.out.println(llave + "-" + key + " | numero Comparendos: " + contadorGeneral);
-				contadorGeneral = 0;
-				diaC = diaC+prueba;
-				prueba = 0;
+				System.out.println(contadorAnio+"/" +contadorMes+"/"+contadorDia+"-"+contadorAnio+"/" +contadorMes+"/"+conta+" numero comparendos: " +contadorGeneral);
 			}
+			contadorDia = conta+1;
+			contadorGeneral=0;
+			maximo = 1500;
+
 		}
 	}
 
@@ -485,93 +476,66 @@ public class Modelo {
 	{
 		Iterator<String> iter = listaComparendos.keys();
 
-		int diaC = 01;
-		int mesC = 01;
-		int anioC = 2018;
-		int prueba = 0;
-		int contadortiempo=0;
-		int entra = 0;
-		String key = anioC+"/" + mesC+"/" + diaC; 
+		int contadorDia= 1;
+		int contadorAnio = 2018;
+		int contadorMes = 1;
+		int cont = 0;
+		int contadorCosto = 0;
+		int costodiario=0;
+		int c = 1;
 
-		int contadorMaximo = 1500;
-		int contadorGeneral =0;
+		int contadorGeneral = 0;
+		int maximo=1500;
 
 		while(iter.hasNext()) 
-		{
+		{	
 			String llave = iter.next();
 			Comparendos comparendo = listaComparendos.get(llave);
 
-			String coordenadas = comparendo.getFECHA_HORA();
-			String[] parts = coordenadas.split("-");
-
-			String part1 = parts[0];
-			String part2 = parts[1];
-			String part3 = parts[2];
-
-			String[] diaP = part3.split("T");
-			int anio = Integer.parseInt(part1);		
-			int mes = Integer.parseInt(part2);
-			int dia = Integer.parseInt(diaP[0]);
-
-			String codigo = anio+"/"+mes+"/"+dia;
-
-			if(hashSectoresSC.get(codigo) != (null))
-			{
-
-				hashSectoresSC.get(codigo).append(comparendo);
-			}
-			else
-			{
-				hashSectoresSC.put(codigo, new Array<Comparendos>());
-				hashSectoresSC.get(codigo).append(comparendo);
-			}	
-
+			String codigo = comparendo.getMes()+""+comparendo.getDia()+""+cont;
+			listaComparendosMayorGravedad.put(codigo, comparendo);
+			cont++;
 		}
 
-		Iterator<String> iterhash = hashSectoresSC.keys();
-
-		while(iterhash.hasNext())
+		while(contadorMes<=12) 
 		{
-			diaC = diaC+prueba;
-			if(diaC>31) {mesC+=1;diaC=diaC-31;}
-			key = anioC+"/" + mesC+"/" + diaC;
+			int conta = contadorDia+d;
+			if(conta>31) {contadorMes++;conta=conta-31;}
 
-			String llave = iterhash.next();
+			String codigo = contadorMes+""+contadorDia;
+			String codigoMayor = contadorMes+""+conta;		
 
-			hashSectoresSC.get(key);
+			Iterator<String> iter2 = listaComparendosMayorGravedad.keysInRange(codigo, codigoMayor);
 
-			if(key.compareTo(llave)>=0 && prueba<=d)
-			{
+			while(iter2.hasNext()) 
+			{	
+				String lector = iter2.next();
+				Comparendos comparendo = listaComparendosMayorGravedad.get(lector);
 
-				for(int i = 0; i < hashSectoresSC.get(llave).size(); i++) 
+				if(maximo>0) 
 				{
-					entra++;
-					if(contadorMaximo>0) 
-					{
-						contadorGeneral++;
-						contadorMaximo--;
-					}
-					else 
-					{
-						contadortiempo++;
-					}
+					contadorGeneral++;
+					maximo--;
 				}
-				contadorMaximo = 1500;
-				prueba++;
+				else 
+				{
+					costodiario++;
+					contadorCosto++;
+				}
 			}
-			else if(prueba>d)
+
+			if(contadorGeneral>0) 
 			{
-				System.out.println(llave + "-" + key + " | numero Comparendos: " + contadorGeneral + "| comparendos perdidos: " + contadortiempo);
-				contadorGeneral = 0;
-				contadortiempo=0;
-				diaC = diaC+prueba;
-				prueba = 0;
+				System.out.println(contadorAnio+"/" +contadorMes+"/"+contadorDia+"-"+contadorAnio+"/" +contadorMes+"/"+conta+" numero comparendos: " +contadorGeneral + " numero comparendo en espera: " +costodiario);
 			}
-			else {
-				diaC = diaC+prueba;
-			}
+			contadorDia = conta+1;
+			contadorGeneral=0;
+			costodiario=0;
+
+			maximo = 1500;
 		}
-		System.out.println(entra);
 	}
+
+
 }
 

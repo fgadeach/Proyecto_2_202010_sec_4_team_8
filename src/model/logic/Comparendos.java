@@ -1,5 +1,7 @@
 package model.logic;
 
+import java.sql.Date;
+
 public class Comparendos implements Comparable<Comparendos> {
 
 	private String TYPE = "";
@@ -15,8 +17,12 @@ public class Comparendos implements Comparable<Comparendos> {
 	private String TYPE_GEO = "";
 	private String COORDINATES = "";
 
+	private int DIA = 0;
+	private int MES = 0;
+	private int ANIO = 0;
 
-	public Comparendos( String tipo, int id, String fecha, String medio ,String clase, String tipoS, String infraccion ,String descripcion, String localidad, String municipio,String tipoGeo, String coordenadas)
+
+	public Comparendos( String tipo, int id, String fecha, String medio ,String clase, String tipoS, String infraccion ,String descripcion, String localidad, String municipio,String tipoGeo, String coordenadas, int dia, int mes,int anio)
 	{
 		TYPE = tipo;
 		OBJECTID = id;
@@ -30,6 +36,9 @@ public class Comparendos implements Comparable<Comparendos> {
 		MUNICIPIO = municipio;
 		TYPE_GEO = tipoGeo;
 		COORDINATES = coordenadas;
+		DIA = dia;
+		MES = mes;
+		ANIO=anio;
 	}
 
 	public String getTYPE() {
@@ -55,7 +64,7 @@ public class Comparendos implements Comparable<Comparendos> {
 	public void setFECHA_HORA(String fECHA_HORA) {
 		FECHA_HORA = fECHA_HORA;
 	}
-	
+
 	public String getMEDIO_DETE() {
 		return MEDIO_DETE;
 	}
@@ -103,7 +112,7 @@ public class Comparendos implements Comparable<Comparendos> {
 	public void setLOCALIDAD(String lOCALIDAD) {
 		LOCALIDAD = lOCALIDAD;
 	}
-	
+
 	public String getMUNICIPIO() {
 		return MUNICIPIO;
 	}
@@ -151,34 +160,33 @@ public class Comparendos implements Comparable<Comparendos> {
 		}
 		return resp;
 	}
-	
-	public int compareToDos(Comparendos o) {
-		// TODO Auto-generated method stub
-		int resp = 0;
-		
-		Integer codigoUno = null;
-		Integer codigoDos = null;
 
-		if(this.getTIPO_SERVI()=="Público") {
-			codigoUno=1;
-		}
-		if(this.getTIPO_SERVI()=="Oficial") {
-			codigoUno=0;
-		}
-		if(this.getTIPO_SERVI()=="Particular") {
-			codigoUno=-1;
-		}
-		if(o.getTIPO_SERVI()=="Público") {
-			codigoUno=1;
-		}
-		if(o.getTIPO_SERVI()=="Oficial") {
-			codigoUno=0;
-		}
-		if(o.getTIPO_SERVI()=="Particular") {
-			codigoUno=-1;
-		}
+
+	public int getDia() 
+	{
 		
-		return codigoUno.toString().compareTo(codigoDos.toString());
+		return DIA;
+		
 	}
+	public int getMes() 
+	{
+
+		return MES;
+	}
+	public int getAnio() 
+	{
+		
+		return ANIO;
+	}
+	public void setDIA(int Dias) {
+		DIA = Dias;
+	}
+	public void setMes(int Mes) {
+		MES = Mes;
+	}
+	public void setAnio(int anio) {
+		ANIO = anio;
+	}
+	
 
 }
