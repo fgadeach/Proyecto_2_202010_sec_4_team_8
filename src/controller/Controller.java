@@ -145,6 +145,20 @@ public class Controller {
 
 				modelo.comparendosRangoLatitudyTipo(n, m, o);
 				break;
+			
+			case 7:
+				System.out.println("--------- \nDar d dias: ");
+				s = lector.nextInt();
+				
+				modelo.TablaAscii(s);
+				break;
+				
+			case 8:
+				System.out.println("--------- \nDar d dias: ");
+				s = lector.nextInt();
+				
+				modelo.costoDeTiempo(s);
+				break;
 
 
 

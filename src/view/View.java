@@ -22,6 +22,8 @@ public class View
 		System.out.println("4. M comparendos mas cercanos a estacion.");
 		System.out.println("5. Buscar los comparendos por medio de detección, clase de vehículo, tipo de servicio y localidad.");
 		System.out.println("6. Buscar los comparendos que tienen una latitud en un rango dado y que involucraron un tipo de vehículo particular.");
+		System.out.println("7. Tabla ASCII.");
+		System.out.println("8. Costo de espera.");
 
 	}
 

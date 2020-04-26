@@ -395,5 +395,183 @@ public class Modelo {
 			}
 		}
 	}
+
+	public void TablaAscii(int d) 
+	{
+		Iterator<String> iter = listaComparendos.keys();
+
+		int diaC = 01;
+		int mesC = 01;
+		int anioC = 2018;
+		int prueba = 0;
+		String key = anioC+"/" + mesC+"/" + diaC; 
+
+		int contadorMaximo = 1500;
+		int contadorGeneral =0;
+
+		while(iter.hasNext()) 
+		{
+			String llave = iter.next();
+			Comparendos comparendo = listaComparendos.get(llave);
+
+			String coordenadas = comparendo.getFECHA_HORA();
+			String[] parts = coordenadas.split("-");
+
+			String part1 = parts[0];
+			String part2 = parts[1];
+			String part3 = parts[2];
+
+			String[] diaP = part3.split("T");
+			int anio = Integer.parseInt(part1);		
+			int mes = Integer.parseInt(part2);
+			int dia = Integer.parseInt(diaP[0]);
+
+			String codigo = anio+"/"+mes+"/"+dia;
+
+			if(hashSectoresSC.get(codigo) != (null))
+			{
+
+				hashSectoresSC.get(codigo).append(comparendo);
+			}
+			else
+			{
+				hashSectoresSC.put(codigo, new Array<Comparendos>());
+				hashSectoresSC.get(codigo).append(comparendo);
+			}	
+
+		}
+
+		Iterator<String> iterhash = hashSectoresSC.keys();
+
+		while(iterhash.hasNext())
+		{
+			diaC = diaC+prueba;
+			if(diaC>31) {mesC+=1;diaC=diaC-31;}
+			key = anioC+"/" + mesC+"/" + diaC;
+
+			String llave = iterhash.next();
+
+			hashSectoresSC.get(key);
+
+			if(key.compareTo(llave)>=0 && prueba<=d)
+			{
+
+				for(int i = 0; i < hashSectoresSC.get(llave).size(); i++) 
+				{
+					if(contadorMaximo>0) 
+					{
+						contadorGeneral++;
+						contadorMaximo--;
+					}else 
+					{
+						break;
+					}
+				}
+				contadorMaximo = 1500;
+				prueba++;
+			}
+
+			else if(prueba>d)
+			{
+				System.out.println(llave + "-" + key + " | numero Comparendos: " + contadorGeneral);
+				contadorGeneral = 0;
+				diaC = diaC+prueba;
+				prueba = 0;
+			}
+		}
+	}
+
+	public void costoDeTiempo(int d) 
+	{
+		Iterator<String> iter = listaComparendos.keys();
+
+		int diaC = 01;
+		int mesC = 01;
+		int anioC = 2018;
+		int prueba = 0;
+		int contadortiempo=0;
+		int entra = 0;
+		String key = anioC+"/" + mesC+"/" + diaC; 
+
+		int contadorMaximo = 1500;
+		int contadorGeneral =0;
+
+		while(iter.hasNext()) 
+		{
+			String llave = iter.next();
+			Comparendos comparendo = listaComparendos.get(llave);
+
+			String coordenadas = comparendo.getFECHA_HORA();
+			String[] parts = coordenadas.split("-");
+
+			String part1 = parts[0];
+			String part2 = parts[1];
+			String part3 = parts[2];
+
+			String[] diaP = part3.split("T");
+			int anio = Integer.parseInt(part1);		
+			int mes = Integer.parseInt(part2);
+			int dia = Integer.parseInt(diaP[0]);
+
+			String codigo = anio+"/"+mes+"/"+dia;
+
+			if(hashSectoresSC.get(codigo) != (null))
+			{
+
+				hashSectoresSC.get(codigo).append(comparendo);
+			}
+			else
+			{
+				hashSectoresSC.put(codigo, new Array<Comparendos>());
+				hashSectoresSC.get(codigo).append(comparendo);
+			}	
+
+		}
+
+		Iterator<String> iterhash = hashSectoresSC.keys();
+
+		while(iterhash.hasNext())
+		{
+			diaC = diaC+prueba;
+			if(diaC>31) {mesC+=1;diaC=diaC-31;}
+			key = anioC+"/" + mesC+"/" + diaC;
+
+			String llave = iterhash.next();
+
+			hashSectoresSC.get(key);
+
+			if(key.compareTo(llave)>=0 && prueba<=d)
+			{
+
+				for(int i = 0; i < hashSectoresSC.get(llave).size(); i++) 
+				{
+					entra++;
+					if(contadorMaximo>0) 
+					{
+						contadorGeneral++;
+						contadorMaximo--;
+					}
+					else 
+					{
+						contadortiempo++;
+					}
+				}
+				contadorMaximo = 1500;
+				prueba++;
+			}
+			else if(prueba>d)
+			{
+				System.out.println(llave + "-" + key + " | numero Comparendos: " + contadorGeneral + "| comparendos perdidos: " + contadortiempo);
+				contadorGeneral = 0;
+				contadortiempo=0;
+				diaC = diaC+prueba;
+				prueba = 0;
+			}
+			else {
+				diaC = diaC+prueba;
+			}
+		}
+		System.out.println(entra);
+	}
 }
 
