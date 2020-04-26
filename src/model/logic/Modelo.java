@@ -40,6 +40,7 @@ public class Modelo {
 
 	private ArbolRojoNegro<String,Comparendos> listaComparendos = new ArbolRojoNegro<>();
 	private ArbolRojoNegro<String,Comparendos> listaComparendosMayorGravedad = new ArbolRojoNegro<>();
+	private Queue<Comparendos> policia = new Queue();
 
 	public void loadComparendos (String comparendosFile)
 	{
@@ -78,19 +79,6 @@ public class Modelo {
 				comparendo.setAnio(anio);
 
 				listaComparendos.put(objectId, comparendo);
-
-				if(hashSectoresSC.get(Key) != (null))
-				{
-					hashSectoresSC.get(Key).append(comparendo);
-				}
-
-				else
-				{
-					hashSectoresSC.put(Key, new Array<Comparendos>());
-					hashSectoresSC.get(Key).append(comparendo);
-				}
-
-
 			}
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -412,65 +400,67 @@ public class Modelo {
 	}
 
 	public void TablaAscii(int d) 
-	{
-		Iterator<String> iter = listaComparendos.keys();
+	{	long tiempoI = System.nanoTime();
+	Iterator<String> iter = listaComparendos.keys();
 
-		int contadorDia= 1;
-		int contadorAnio = 2018;
-		int contadorMes = 1;
-		int cont = 0;
+	int contadorDia= 1;
+	int contadorAnio = 2018;
+	int contadorMes = 1;
+	int cont = 0;
+	int contadorGeneral = 0;
+	int maximo=1500*d;
 
-		int contadorGeneral = 0;
-		int maximo=1500;
+	while(iter.hasNext()) 
+	{	
+		String llave = iter.next();
+		Comparendos comparendo = listaComparendos.get(llave);
 
-		while(iter.hasNext()) 
-		{	
-			String llave = iter.next();
-			Comparendos comparendo = listaComparendos.get(llave);
-
-			String codigo = comparendo.getMes()+""+comparendo.getDia()+""+cont;
-			listaComparendosMayorGravedad.put(codigo, comparendo);
-			cont++;
-		}
-
-		while(contadorMes<=12) 
-		{
-			int conta = contadorDia+d;
-			if(conta>31) {contadorMes++;conta=conta-31;}
-
-
-			String codigo = contadorMes+""+contadorDia;
-			String codigoMayor = contadorMes+""+conta;		
-
-			Iterator<String> iter2 = listaComparendosMayorGravedad.keysInRange(codigo, codigoMayor);
-
-			while(iter2.hasNext()) 
-			{	
-				String lector = iter2.next();
-				Comparendos comparendo = listaComparendosMayorGravedad.get(lector);
-
-				if(maximo>0) 
-				{
-					contadorGeneral++;
-					maximo--;
-
-				}
-				else 
-				{
-					break;
-				}
-			}
-
-			if(contadorGeneral>0) 
-			{
-				System.out.println(contadorAnio+"/" +contadorMes+"/"+contadorDia+"-"+contadorAnio+"/" +contadorMes+"/"+conta+" numero comparendos: " +contadorGeneral);
-			}
-			contadorDia = conta+1;
-			contadorGeneral=0;
-			maximo = 1500;
-
-		}
+		String codigo = comparendo.getMes()+""+comparendo.getDia()+""+cont;
+		listaComparendosMayorGravedad.put(codigo, comparendo);
+		cont++;
 	}
+
+	while(contadorMes<=12) 
+	{
+		int c = 0;
+		int conta = contadorDia+d;
+		if(conta>31) {contadorMes++;conta=conta-31;}
+
+		String codigo = contadorMes+""+contadorDia;
+		String codigoMayor = contadorMes+""+conta;		
+
+		Iterator<String> iter2 = listaComparendosMayorGravedad.keysInRange(codigo, codigoMayor);
+
+		while(iter2.hasNext()) 
+		{	
+			String lector = iter2.next();
+			Comparendos comparendo = listaComparendosMayorGravedad.get(lector);
+			policia.enqueue(comparendo);
+			if(maximo>0) 
+			{
+				contadorGeneral++;
+				maximo--;
+			}
+			else 
+			{
+				break;
+			}
+		}
+
+		if(contadorGeneral>0) 
+		{
+			System.out.println(contadorAnio+"/" +contadorMes+"/"+contadorDia+"-"+contadorAnio+"/" +contadorMes+"/"+conta+" numero comparendos: " +contadorGeneral);
+		}
+		contadorDia = conta+1;
+		contadorGeneral=0;
+		maximo = 1500*d;
+	}
+	long tiempoF = System.nanoTime();
+	double demora = (tiempoF - tiempoI)/ 1e6;
+	}
+
+
+
 
 	public void costoDeTiempo(int d) 
 	{
@@ -485,7 +475,7 @@ public class Modelo {
 		int c = 1;
 
 		int contadorGeneral = 0;
-		int maximo=1500;
+		int maximo=1500*d;
 
 		while(iter.hasNext()) 
 		{	
@@ -511,7 +501,7 @@ public class Modelo {
 			{	
 				String lector = iter2.next();
 				Comparendos comparendo = listaComparendosMayorGravedad.get(lector);
-
+				policia.enqueue(comparendo);
 				if(maximo>0) 
 				{
 					contadorGeneral++;
@@ -523,19 +513,76 @@ public class Modelo {
 					contadorCosto++;
 				}
 			}
-
+			if(contadorGeneral>1500) {
+				costodiario = contadorGeneral-1500;
+				contadorGeneral = 1500;
+			}
 			if(contadorGeneral>0) 
 			{
 				System.out.println(contadorAnio+"/" +contadorMes+"/"+contadorDia+"-"+contadorAnio+"/" +contadorMes+"/"+conta+" numero comparendos: " +contadorGeneral + " numero comparendo en espera: " +costodiario);
 			}
 			contadorDia = conta+1;
-			contadorGeneral=0;
+			contadorGeneral=costodiario;
 			costodiario=0;
-
-			maximo = 1500;
+			maximo = 1500*10;
 		}
 	}
 
+	public void solucion() 
+	{	long tiempoI = System.nanoTime();
+	Iterator<String> iter = listaComparendos.keys();
 
+	while(iter.hasNext()) 
+	{	
+		String llave = iter.next();
+		Comparendos comparendo = listaComparendos.get(llave);
+
+		String codigo = comparendo.getMes()+""+comparendo.getDia()+"";
+
+		if(hashSectoresSC.get(codigo) != (null))
+		{
+			hashSectoresSC.get(codigo).append(comparendo);
+		}
+
+		else
+		{
+			hashSectoresSC.put(codigo, new Array<Comparendos>());
+			hashSectoresSC.get(codigo).append(comparendo);
+		}
+	}
+	long tiempoF = System.nanoTime();
+	double demora = (tiempoF - tiempoI)/ 1e6;
+	System.out.println(demora);
+	}
+
+	public void demoraP() 
+	{	
+		long tiempoI = System.nanoTime();
+		Iterator<String> iter = listaComparendos.keys();
+		int cont = 0;
+		while(iter.hasNext()) 
+		{	
+			String llave = iter.next();
+			Comparendos comparendo = listaComparendos.get(llave);
+
+			String codigo = comparendo.getMes()+""+comparendo.getDia()+""+cont;
+			listaComparendosMayorGravedad.put(codigo, comparendo);
+			cont++;
+		}
+		Iterator<String> iter2 = listaComparendosMayorGravedad.keys();
+
+		while(iter2.hasNext()) 
+		{	
+			String lector = iter2.next();
+			Comparendos comparendo = listaComparendosMayorGravedad.get(lector);
+			policia.enqueue(comparendo);
+
+		}
+
+		long tiempoF = System.nanoTime();
+		double demora = (tiempoF - tiempoI)/ 1e6;
+		System.out.println(demora);
+	}
 }
+
 

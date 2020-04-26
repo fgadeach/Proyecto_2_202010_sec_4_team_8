@@ -24,6 +24,7 @@ public class View
 		System.out.println("6. Buscar los comparendos que tienen una latitud en un rango dado y que involucraron un tipo de vehículo particular.");
 		System.out.println("7. Tabla ASCII.");
 		System.out.println("8. Costo de espera.");
+		System.out.println("9. Comparador Tiempo.");
 
 	}
 

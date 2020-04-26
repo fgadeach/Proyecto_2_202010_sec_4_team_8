@@ -35,7 +35,7 @@ public class Controller {
 
 	private Comparendos comparendo;
 
-	public static final String ruta="./data/comparendos.geojson";
+	public static final String ruta="./data/comparendos1.geojson";
 	/**
 	 * Crear la vista y el modelo del proyecto
 	 * @param capacidad tamaNo inicial del arreglo
@@ -58,6 +58,7 @@ public class Controller {
 		String p = null;
 		String q = null;
 
+		int y =1;
 		int s= 0;
 		int r= 0;
 
@@ -159,7 +160,13 @@ public class Controller {
 				
 				modelo.costoDeTiempo(s);
 				break;
-
+				
+			case 9:
+				System.out.println("--------- \nTiempo actual policia: ");				
+				modelo.demoraP();
+				System.out.println("--------- \nTiempo solucion: ");
+				modelo.solucion();
+				break;
 
 
 			default: 
